@@ -31,11 +31,12 @@ class UserController extends Controller
     }
     
     public function index()
-    {
+    {  
+        // dd(213213213);
         /**
          *  注册
          */
-        $url = "http://user.wangzhimo.top/user";
+        $url = "http://api.1905.com/user";
         $data = request()->except('_token');
         //初始化
         $ch = curl_init();
@@ -60,7 +61,7 @@ class UserController extends Controller
      */
     public function index2()
     {
-        $url = "http://user.wangzhimo.top/passport";
+        $url = "http://api.1905.com/passport";
         $data = request()->except('_token');
         //初始化
         $ch = curl_init();
@@ -79,7 +80,7 @@ class UserController extends Controller
  
   public function index5()
     {
-        $url = "http://user.wangzhimo.top/passports";
+        $url = "http://api.1905.com/passports";
         $data = request()->except('_token');
         //初始化
         $ch = curl_init();
@@ -98,7 +99,7 @@ class UserController extends Controller
  
     public function index6()
     {
-        $url = "http://user.wangzhimo.top/passportd";
+        $url = "http://api.1905.com/passportd";
         $data = request()->except('_token');
         //初始化
         $ch = curl_init();
@@ -119,7 +120,7 @@ class UserController extends Controller
     {
  
  
-         $url = "http://user.wangzhimo.top/token";
+         $url = "http://api.1905.com/token";
          $name = request()->input('name');
          $token = request()->input('token');
          $data = [
@@ -137,4 +138,57 @@ class UserController extends Controller
         //关闭回话
         curl_close($ch);
     }
+
+    /**
+     * Undocumented function
+     *APP注册
+     * @return void
+     */
+    public function reg()
+    {
+        // echo '<pre>';print_r($_POST);echo '</pre>';
+        // 请求api
+        $url = 'http://api.1905.com/user';
+        
+        $response = CommonModel::curlPost($url,$_POST);
+        return $response;
+    }
+
+    /**
+     * APP登录
+     */
+
+    public function login1()
+    {
+        // 请求api
+        $url = 'http://api.1905.com/passport';
+        
+        $response = CommonModel::curlPost($url,$_POST);
+        echo '<pre>';print_r($response);echo '</pre>';
+        return $response;
+    }
+
+    public function showData()
+    {
+        // 收到 token
+        $id = $_SERVER['HTTP_ID'];
+        $token = $_SERVER['HTTP_TOKEN'];
+
+        
+        echo 'ID: ' . $id;echo '<br>';
+        echo 'TOKEN: ' . $token;echo '<br>';
+
+        // 请求api鉴权
+        $url = 'http://api.1905.com/auth'; //鉴权接口
+        $response = CommonModel::curlPost($url,['id'=>$id,'token'=>$token]);
+        // var_dump($response);die;
+        $status = json_decode($response,true);
+        // var_dump($status);die;
+        // 处理鉴权结果
+        
+        // var_dump($response);
+        echo '<pre>';print_r($response);echo '</pre>';
+        echo date('Y-m-d H:i:s');
+    }
+
 }
