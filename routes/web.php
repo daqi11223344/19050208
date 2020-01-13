@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('/user','User\UserController@index');
+Route::get('/user','User\UserController@index');
 Route::post('/login','User\UserController@index2');
 Route::post('/loginss','User\UserController@index5');
 Route::post('/loginsss','User\UserController@index6');
