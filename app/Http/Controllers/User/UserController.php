@@ -35,7 +35,7 @@ class UserController extends Controller
         /**
          *  注册
          */
-        $url = "http://api.1905.com/user";
+        $url = "http://user.wangzhimo.top/user";
         $data = request()->except('_token');
         //初始化
         $ch = curl_init();
@@ -60,7 +60,7 @@ class UserController extends Controller
      */
     public function index2()
     {
-        $url = "http://api.1905.com/passport";
+        $url = "http://user.wangzhimo.top/passport";
         $data = request()->except('_token');
         //初始化
         $ch = curl_init();
@@ -79,7 +79,7 @@ class UserController extends Controller
  
   public function index5()
     {
-        $url = "http://api.1905.com/passports";
+        $url = "http://user.wangzhimo.top/passports";
         $data = request()->except('_token');
         //初始化
         $ch = curl_init();
@@ -98,7 +98,7 @@ class UserController extends Controller
  
     public function index6()
     {
-        $url = "http://api.1905.com/passportd";
+        $url = "http://user.wangzhimo.top/passportd";
         $data = request()->except('_token');
         //初始化
         $ch = curl_init();
@@ -119,7 +119,7 @@ class UserController extends Controller
     {
  
  
-         $url = "http://api.1905.com/token";
+         $url = "http://user.wangzhimo.top/token";
          $name = request()->input('name');
          $token = request()->input('token');
          $data = [
