@@ -36,7 +36,7 @@ class UserController extends Controller
         /**
          *  注册
          */
-        $url = "http://user.wangzhimo.top/user";
+        $url = "http://passport.wangzhimo.top/user";
         $data = request()->except('_token');
         //初始化
         $ch = curl_init();
@@ -61,7 +61,7 @@ class UserController extends Controller
      */
     public function index2()
     {
-        $url = "http://user.wangzhimo.top/passport";
+        $url = "http://passport.wangzhimo.top/passport";
         $data = request()->except('_token');
         //初始化
         $ch = curl_init();
@@ -80,7 +80,7 @@ class UserController extends Controller
  
   public function index5()
     {
-        $url = "http://user.wangzhimo.top/passports";
+        $url = "http://passport.wangzhimo.top/passports";
         $data = request()->except('_token');
         //初始化
         $ch = curl_init();
@@ -99,7 +99,7 @@ class UserController extends Controller
  
     public function index6()
     {
-        $url = "http://user.wangzhimo.top/passportd";
+        $url = "http://passport.wangzhimo.top/passportd";
         $data = request()->except('_token');
         //初始化
         $ch = curl_init();
@@ -120,7 +120,7 @@ class UserController extends Controller
     {
  
  
-         $url = "http://user.wangzhimo.top/token";
+         $url = "http://passport.wangzhimo.top/token";
          $name = request()->input('name');
          $token = request()->input('token');
          $data = [
@@ -148,7 +148,7 @@ class UserController extends Controller
     {
         // echo '<pre>';print_r($_POST);echo '</pre>';
         // 请求api
-        $url = 'http://user.wangzhimo.top/user';
+        $url = 'http://passport.wangzhimo.top/user';
         
         $response = CommonModel::curlPost($url,$_POST);
         return $response;
@@ -161,7 +161,7 @@ class UserController extends Controller
     public function login1()
     {
         // 请求api
-        $url = 'http://user.wangzhimo.top/passport';
+        $url = 'http://passport.wangzhimo.top/passport';
         
         $response = CommonModel::curlPost($url,$_POST);
         echo '<pre>';print_r($response);echo '</pre>';
@@ -179,7 +179,7 @@ class UserController extends Controller
         echo 'TOKEN: ' . $token;echo '<br>';
 
         // 请求api鉴权
-        $url = 'http://user.wangzhimo.top/auth'; //鉴权接口
+        $url = 'http://passport.wangzhimo.top/auth'; //鉴权接口
         $response = CommonModel::curlPost($url,['id'=>$id,'token'=>$token]);
         // var_dump($response);die;
         $status = json_decode($response,true);
