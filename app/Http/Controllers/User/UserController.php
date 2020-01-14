@@ -36,7 +36,7 @@ class UserController extends Controller
         /**
          *  注册
          */
-        $url = "http://api.1905.com/user";
+        $url = "http://user.1905.com/user";
         $data = request()->except('_token');
         //初始化
         $ch = curl_init();
@@ -61,7 +61,7 @@ class UserController extends Controller
      */
     public function index2()
     {
-        $url = "http://api.1905.com/passport";
+        $url = "http://user.1905.com/passport";
         $data = request()->except('_token');
         //初始化
         $ch = curl_init();
@@ -80,7 +80,7 @@ class UserController extends Controller
  
   public function index5()
     {
-        $url = "http://api.1905.com/passports";
+        $url = "http://user.1905.com/passports";
         $data = request()->except('_token');
         //初始化
         $ch = curl_init();
@@ -99,7 +99,7 @@ class UserController extends Controller
  
     public function index6()
     {
-        $url = "http://api.1905.com/passportd";
+        $url = "http://user.1905.com/passportd";
         $data = request()->except('_token');
         //初始化
         $ch = curl_init();
@@ -120,7 +120,7 @@ class UserController extends Controller
     {
  
  
-         $url = "http://api.1905.com/token";
+         $url = "http://user.1905.com/token";
          $name = request()->input('name');
          $token = request()->input('token');
          $data = [
@@ -148,7 +148,7 @@ class UserController extends Controller
     {
         // echo '<pre>';print_r($_POST);echo '</pre>';
         // 请求api
-        $url = 'http://api.1905.com/user';
+        $url = 'http://user.1905.com/user';
         
         $response = CommonModel::curlPost($url,$_POST);
         return $response;
@@ -161,7 +161,7 @@ class UserController extends Controller
     public function login1()
     {
         // 请求api
-        $url = 'http://api.1905.com/passport';
+        $url = 'http://user.1905.com/passport';
         
         $response = CommonModel::curlPost($url,$_POST);
         echo '<pre>';print_r($response);echo '</pre>';
@@ -179,7 +179,7 @@ class UserController extends Controller
         echo 'TOKEN: ' . $token;echo '<br>';
 
         // 请求api鉴权
-        $url = 'http://api.1905.com/auth'; //鉴权接口
+        $url = 'http://user.1905.com/auth'; //鉴权接口
         $response = CommonModel::curlPost($url,['id'=>$id,'token'=>$token]);
         // var_dump($response);die;
         $status = json_decode($response,true);
