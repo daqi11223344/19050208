@@ -208,12 +208,12 @@ class UserController extends Controller
 
     public function md5post()
     {
-        $data = "659ad3fb044f7f4b2f7161890f1b6784";   //要发送的数据
-        $key = '哒哒哒哒哒哒';  //计算签名的key 发送端与接收端拥有相同的key
+        $data = "Hello Word";   //要发送的数据
+        $key = '111';  //计算签名的key 发送端与接收端拥有相同的key
 
         // 计算签名
 
-        $signature = '59fd7aac57f6eaa3584eebcb472aa533';
+        $signature = '';
 
         echo "待发送的数据：" . $data;echo '<br>';
         echo "签名：" . $signature;echo '<br>';
@@ -225,5 +225,103 @@ class UserController extends Controller
         echo $response;
     }
 
+    public function sign()
+    {
+        $key = "111";
+
+        $order = [
+            "order_id"      =>  'WQ...' . mt_rand(111111,999999),
+            "order_amount"  =>  mt_rand(111,999),
+            "id"            =>  12345,
+            "add_time"      =>  time(),
+        ];
+
+        // dd($order_info);
+
+        $json = json_encode($order);
+
+        // 计算签名
+        $reg = md5($json.$key);
+
+        $url = "http://api.1905.com/checks";
+         $data = [
+             'reg'.$reg,
+             'json'.$json
+         ];
+
+        //初始化
+        $ch = curl_init();
+        //设置参数
+        curl_setopt($ch,CURLOPT_URL,$url);
+        curl_setopt($ch,CURLOPT_POST,1);
+        curl_setopt($ch,CURLOPT_POSTFIELDS,$data);
+        //发起请求
+        curl_exec($ch);
+        //关闭回话
+        curl_close($ch);
+    }
+
+    //私钥验签
+   public function priv(){
+    $priv_key = file_get_contents(storage_path('keys/priv'));
+    echo $priv_key;
+    echo '<hr>';
+    $data = [
+        'name' => 'wangqi',
+        'age'  => '女' 
+    ];
+    $data = json_encode($data);
+    $sign = md5($priv_key . $data);
+    echo $sign;
+    echo '<hr>';
+    $url = "http://api.1905.com/priv";
+        
+    $data=[
+        'sign' => $sign,
+        'data'=>$data
+    ];
+      //初始化
+      $ch = curl_init();
+      //设置参数
+      curl_setopt($ch,CURLOPT_URL,$url);
+      curl_setopt($ch,CURLOPT_POST,1);
+      curl_setopt($ch,CURLOPT_POSTFIELDS,$data);
+      //发起请求
+      curl_exec($ch);
+      //关闭回话
+      curl_close($ch);
+   }
+
+   //公钥签名
+   public function pub(){
+    $pub_key = file_get_contents(storage_path('keys/pub'));
+    echo $pub_key;
+    echo '<hr>';
+    $data = [
+        'name' => 'wangqi',
+        'age'  => '女' 
+    ];
+    $data = json_encode($data);
+    $sign = md5($pub_key . $data);
+    echo $sign;
+    echo '<hr>';
+    $url = "http://api.1905.com/pub";
+        
+    $data=[
+        'sign' => $sign,
+        'data'=>$data
+    ];
+      //初始化
+      $ch = curl_init();
+      //设置参数
+      curl_setopt($ch,CURLOPT_URL,$url);
+      curl_setopt($ch,CURLOPT_POST,1);
+      curl_setopt($ch,CURLOPT_POSTFIELDS,$data);
+      //发起请求
+      curl_exec($ch);
+      //关闭回话
+      curl_close($ch);
+
+   }
 
 }

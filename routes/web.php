@@ -37,3 +37,7 @@ Route::get('/pest','User\UserController@pest')->middleware('filter','check.token
 
 Route::get('/md5','User\UserController@md5post');
 
+Route::get('/sign','User\UserController@sign');       //POST
+Route::get('/priv','User\UserController@priv'); 
+Route::get('/pub','User\UserController@pub'); 
+
