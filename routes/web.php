@@ -31,3 +31,9 @@ Route::post('/reg','User\UserController@reg');
 Route::post('/login1','User\UserController@login1');
 Route::get('/showData','User\UserController@showData');
 Route::get('/auth','User\UserController@auth'); //鉴权
+
+Route::get('/peest','User\UserController@peest');
+Route::get('/pest','User\UserController@pest')->middleware('filter','check.token');
+
+Route::get('/md5','User\UserController@md5post');
+

@@ -36,7 +36,7 @@ class UserController extends Controller
         /**
          *  注册
          */
-        $url = "http://passport.wangzhimo.top/user";
+        $url = "http://api.1905.com/user";
         $data = request()->except('_token');
         //初始化
         $ch = curl_init();
@@ -61,7 +61,7 @@ class UserController extends Controller
      */
     public function index2()
     {
-        $url = "http://passport.wangzhimo.top/passport";
+        $url = "http://api.1905.com/passport";
         $data = request()->except('_token');
         //初始化
         $ch = curl_init();
@@ -80,7 +80,7 @@ class UserController extends Controller
  
   public function index5()
     {
-        $url = "http://passport.wangzhimo.top/passports";
+        $url = "http://api.1905.com/passports";
         $data = request()->except('_token');
         //初始化
         $ch = curl_init();
@@ -99,7 +99,7 @@ class UserController extends Controller
  
     public function index6()
     {
-        $url = "http://passport.wangzhimo.top/passportd";
+        $url = "http://api.1905.com/passportd";
         $data = request()->except('_token');
         //初始化
         $ch = curl_init();
@@ -120,7 +120,7 @@ class UserController extends Controller
     {
  
  
-         $url = "http://passport.wangzhimo.top/token";
+         $url = "http://api.1905.com/token";
          $name = request()->input('name');
          $token = request()->input('token');
          $data = [
@@ -148,7 +148,7 @@ class UserController extends Controller
     {
         // echo '<pre>';print_r($_POST);echo '</pre>';
         // 请求api
-        $url = 'http://passport.wangzhimo.top/user';
+        $url = 'http://api.1905.com/user';
         
         $response = CommonModel::curlPost($url,$_POST);
         return $response;
@@ -161,7 +161,7 @@ class UserController extends Controller
     public function login1()
     {
         // 请求api
-        $url = 'http://passport.wangzhimo.top/passport';
+        $url = 'http://api.1905.com/passport';
         
         $response = CommonModel::curlPost($url,$_POST);
         echo '<pre>';print_r($response);echo '</pre>';
@@ -179,7 +179,7 @@ class UserController extends Controller
         echo 'TOKEN: ' . $token;echo '<br>';
 
         // 请求api鉴权
-        $url = 'http://passport.wangzhimo.top/auth'; //鉴权接口
+        $url = 'http://api.1905.com/auth'; //鉴权接口
         $response = CommonModel::curlPost($url,['id'=>$id,'token'=>$token]);
         // var_dump($response);die;
         $status = json_decode($response,true);
@@ -190,5 +190,40 @@ class UserController extends Controller
         echo '<pre>';print_r($response);echo '</pre>';
         echo date('Y-m-d H:i:s');
     }
+    public function peest()
+    {
+        echo __METHOD__;
+    }
+
+    public function pest()
+    {
+        $data = [
+            'user_name' => 'lisi',
+            'email'     => 'lilsi@qq.com',
+            'amount'    => 10000
+        ];
+
+        echo json_encode($data);
+    }
+
+    public function md5post()
+    {
+        $data = "659ad3fb044f7f4b2f7161890f1b6784";   //要发送的数据
+        $key = '1905';  //计算签名的key 发送端与接收端拥有相同的key
+
+        // 计算签名MD5（$data . $key）
+
+        $signature = '59fd7aac57f6eaa3584eebcb472aa533';
+
+        echo "待发送的数据：" . $data;echo '<br>';
+        echo "签名：" . $signature;echo '<br>';
+
+        // 发送数据
+        $url = "http://api.1905.com/check?data=".$data . '&signature=' . $signature;
+        echo $url;echo '<hr>';
+        $response = file_get_contents($url);
+        echo $response;
+    }
+
 
 }
