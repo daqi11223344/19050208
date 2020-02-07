@@ -232,7 +232,7 @@ class UserController extends Controller
         $order = [
             "order_id"      =>  'WQ...' . mt_rand(111111,999999),
             "order_amount"  =>  mt_rand(111,999),
-            "id"            =>  12345,
+            "id"            =>  123,
             "add_time"      =>  time(),
         ];
 
@@ -245,8 +245,8 @@ class UserController extends Controller
 
         $url = "http://api.1905.com/checks";
          $data = [
-             'reg'.$reg,
-             'json'.$json
+             'reg'=>$reg,
+             'order'=>$json
          ];
 
         //初始化
