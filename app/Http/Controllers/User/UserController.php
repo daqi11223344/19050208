@@ -209,9 +209,9 @@ class UserController extends Controller
     public function md5post()
     {
         $data = "659ad3fb044f7f4b2f7161890f1b6784";   //要发送的数据
-        $key = '1905';  //计算签名的key 发送端与接收端拥有相同的key
+        $key = '哒哒哒哒哒哒';  //计算签名的key 发送端与接收端拥有相同的key
 
-        // 计算签名MD5（$data . $key）
+        // 计算签名
 
         $signature = '59fd7aac57f6eaa3584eebcb472aa533';
 
