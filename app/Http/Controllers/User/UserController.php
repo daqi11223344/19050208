@@ -262,7 +262,8 @@ class UserController extends Controller
     }
 
     //私钥验签
-   public function priv(){
+   public function priv()
+   {
     echo '<hr>';
     $data = [
         'name' => 'wangqi',
@@ -305,36 +306,71 @@ class UserController extends Controller
       curl_close($ch);
    }
 
-   //公钥签名
-//    public function pub(){
-//     $pub_key = file_get_contents(storage_path('keys/pub'));
-//     echo $pub_key;
-//     echo '<hr>';
-//     $data = [
-//         'name' => 'wangqi',
-//         'age'  => '女' 
-//     ];
-//     $data = json_encode($data);
-//     $sign = md5($pub_key . $data);
-//     echo $sign;
-//     echo '<hr>';
-//     $url = "http://api.1905.com/pub";
-        
-//     $data=[
-//         'sign' => $sign,
-//         'data'=>$data
-//     ];
-//       //初始化
-//       $ch = curl_init();
-//       //设置参数
-//       curl_setopt($ch,CURLOPT_URL,$url);
-//       curl_setopt($ch,CURLOPT_POST,1);
-//       curl_setopt($ch,CURLOPT_POSTFIELDS,$data);
-//       //发起请求
-//       curl_exec($ch);
-//       //关闭回话
-//       curl_close($ch);
+//公钥签名
+    //    public function pub(){
+    //     $pub_key = file_get_contents(storage_path('keys/pub'));
+    //     echo $pub_key;
+    //     echo '<hr>';
+    //     $data = [
+    //         'name' => 'wangqi',
+    //         'age'  => '女' 
+    //     ];
+    //     $data = json_encode($data);
+    //     $sign = md5($pub_key . $data);
+    //     echo $sign;
+    //     echo '<hr>';
+    //     $url = "http://api.1905.com/pub";
+            
+    //     $data=[
+    //         'sign' => $sign,
+    //         'data'=>$data
+    //     ];
+    //       //初始化
+    //       $ch = curl_init();
+    //       //设置参数
+    //       curl_setopt($ch,CURLOPT_URL,$url);
+    //       curl_setopt($ch,CURLOPT_POST,1);
+    //       curl_setopt($ch,CURLOPT_POSTFIELDS,$data);
+    //       //发起请求
+    //       curl_exec($ch);
+    //       //关闭回话
+    //       curl_close($ch);
 
 //    }
+
+
+    public function rsa()
+    {
+
+        $res = 'hello hello';
+
+        echo '<pre>';print_r($res);echo '</pre>';
+        $json_str = json_encode($res);
+
+        echo "<b style=color:red>待加密</b>" . $json_str;echo '<hr>';
+
+        $met = 'AES-256-CBC';
+        $key = '1905api';
+        $vi = 'WUSD8796IDjhkchd';
+
+        $data = openssl_encrypt($json_str,$met,$key,OPENSSL_RAW_DATA,$vi);
+        echo "<b style=color:red>加密后密文：</b>" . $data;echo '<hr>';
+
+        $base64_str = base64_encode($data);
+        echo "<b style=color:red>base64_str:</b>".$base64_str;
+        echo '<hr>';
+
+        // url encode
+        $url_encode_str = urldecode($base64_str);
+        echo '<b style=color:green>$url_encode_str:</b>'.$url_encode_str;
+        echo '<hr>';
+
+        $url = "http://api.1905.com/rsa1?data=".$url_encode_str;
+        // dd($url);
+        echo $url;echo '<br>';
+        $response = file_get_contents($url);
+        echo $response;
+    }
+
 
 }

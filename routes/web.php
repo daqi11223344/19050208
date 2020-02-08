@@ -41,3 +41,6 @@ Route::get('/sign','User\UserController@sign');       //POST
 Route::get('/priv','User\UserController@priv'); 
 Route::get('/pub','User\UserController@pub'); 
 
+Route::get('/rsa','User\UserController@rsa'); 
+
+
