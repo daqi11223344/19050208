@@ -372,5 +372,35 @@ class UserController extends Controller
         echo $response;
     }
 
+    //非对称加密解密 
+    public function rsa1()
+    {
+        $priv_key = file_get_contents(storage_path('keys/priv'));
+        // echo $priv_key;
+        // echo '<hr>';
+
+        $data = "hello hello";
+        echo "代加密数据：". $data;
+        echo '<hr>';
+
+        openssl_private_encrypt($data,$base64_str,$priv_key);
+        var_dump($base64_str);
+        echo '<hr>';
+
+        // 将密文发送至对方
+
+        $base64_encode_str = base64_encode($base64_str); //密文经base64编码
+        echo "base64_encode_str :" . $base64_encode_str;echo "<hr>";
+
+        $urlencode = urlencode($base64_encode_str);
+        echo "urlencode :" . $urlencode;echo "<hr>";
+        $url = 'http://api.1905.com/rsa2?data='. $urlencode;
+
+        echo "<b style='color:red'>url :</b>" . $url;
+        echo "<hr>";
+        // $response = file_get_contents($url);
+        // echo $response;
+    }
+
 
 }

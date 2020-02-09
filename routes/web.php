@@ -41,6 +41,7 @@ Route::get('/sign','User\UserController@sign');       //POST
 Route::get('/priv','User\UserController@priv'); 
 Route::get('/pub','User\UserController@pub'); 
 
-Route::get('/rsa','User\UserController@rsa'); 
+Route::get('/rsa','User\UserController@rsa');   //对称加密
+Route::get('/rsa1','User\UserController@rsa1');     //非对称加密
 
 
